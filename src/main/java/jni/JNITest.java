@@ -7,9 +7,11 @@ package jni;
  * cd /Users/qhli/src/java/javase-tests/
  * mvn compile
  * cd /Users/qhli/src/java/javase-tests/target/classes
- * #生成头文件：com_qhli_demo_javase_jni_JNITest.h
- * javah -jni com.qhli.demo.javase.jni.JNITest
+ * #生成头文件：jni_JNITest.h
+ * javah -jni jni.JNITest
  *
+ * cp jni_JNITest.h  /Users/qhli/src/java/javase-tests/src/main/cpp/
+ * cd /Users/qhli/src/java/javase-tests/src/main/cpp/
  * cpp size:
  * 写cpp或c端实现
  * vi Hello.app/Hello.c (#include "JNITest.h")
@@ -54,7 +56,7 @@ public class JNITest {
 //    那么你只要把dependency.dll放在任何java.library.path包含的路径中即可
     static{
         // 下面两行同时放天，以第一条为准
-        System.load("/Users/qhli/src/java/javase-tests/target/classes/libHello.so");
+        System.load("/Users/qhli/src/java/javase-tests/src/main/cpp/libHello.so");
 //        `System.load("/Users/qhli/src/java/javase-tests/src/main/resources/jni/Hello.so");
 
     }
