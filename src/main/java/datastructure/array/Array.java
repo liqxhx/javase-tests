@@ -42,8 +42,13 @@ public class Array<T extends Comparable<T>> {
      * @param item
      */
     public void add(int index, T item) {
-        if (index >= this.data.length || index < 0) {
+        if (index > this.data.length || index < 0) {
             throw new IllegalArgumentException("out of range.");
+        }
+
+        // 扩容
+        if(this.size == this.data.length) {
+            resize(this.data.length * 2);
         }
 
 
@@ -82,6 +87,14 @@ public class Array<T extends Comparable<T>> {
      */
     public boolean isEmpty() {
         return this.size == 0;
+    }
+
+    private void resize(int newSize){
+        T[] newData = (T[]) new Comparable[newSize];
+        for( int i = 0 ; i < this.size ; i++) {
+            newData[i] = this.data[i];
+        }
+        this.data = newData;
     }
 
     @Override
@@ -149,9 +162,14 @@ public class Array<T extends Comparable<T>> {
         }
 
         size --;
-
         // gc
         data[size] = null;
+
+        // 缩容
+        if(size == data.length / 2) {
+            resize(data.length/2);
+        }
+
         return ret;
     }
 
@@ -199,7 +217,15 @@ public class Array<T extends Comparable<T>> {
         arr.addFirst(1);
         arr.add(2, 1);
         System.out.println(arr);
-        arr.removeAllElement(1);
+//        arr.removeAllElement(1);
+//        System.out.println(arr);
+
+        arr.addLast(5);
+        arr.addLast(6);
+        arr.addLast(7);
+        System.out.println(arr);
+
+        arr.remove(1);
         System.out.println(arr);
     }
 
