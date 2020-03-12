@@ -14,7 +14,7 @@ import java.util.Arrays;
  */
 public class FlatMapTests {
     @Test
-    public void tetFlagtMap() {
+    public void testFlagtMap() {
         Arrays.asList("s1", "s2", "s3").stream()
                 .map(s -> Arrays.asList(s))
                 .flatMap(l -> l.stream())
