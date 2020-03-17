@@ -1,7 +1,7 @@
 *~
 **/target
 **/.idea
-**/.settings/
+**/.settings
 *.iml
 .DS_Store
 *.class
@@ -10,3 +10,5 @@
 .project
 *.o
 *.so
+*.classpath
+*.factorypath
