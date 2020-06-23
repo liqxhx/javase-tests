@@ -2,10 +2,14 @@ package stream;
 
 import lombok.Builder;
 import lombok.Data;
+import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -17,6 +21,8 @@ import java.util.stream.Collectors;
  * @since 2019/12/12 15:47
  */
 public class ToMapTest {
+    @Rule
+    public final TestName name = new TestName();
 
     @Data
     @Builder
@@ -40,9 +46,13 @@ public class ToMapTest {
 
     @Test
     public void testToMap() {
+        Assert.assertEquals("testToMap", name.getMethodName());
+
         List<User> list = init(10);
 
-        System.out.println(list.stream().collect(Collectors.groupingBy(User::getDeptId)));
+        Map<Integer, List<User>> deptUsers = list.stream().collect(Collectors.groupingBy(User::getDeptId));
+        Assert.assertEquals(deptUsers.size(), 2);
+        System.out.println(deptUsers);
     }
 
 }
